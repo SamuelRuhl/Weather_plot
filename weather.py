@@ -2,9 +2,12 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
+ti = time.localtime()
+ti_str = str(ti.tm_mday)+"."+str(ti.tm_mon)+"."+str(ti.tm_year)
 #Load weather data From .txt file in the same Dictonarie
-data_arr = np.loadtxt("SBEns_03.03.18_month.txt",skiprows = 5)
+data_arr = np.loadtxt("SB_"+ti_str + ".txt")
 np.savetxt("data.txt",data_arr,delimiter=" ")
 
 
@@ -29,7 +32,8 @@ ax2 = ax1.twinx()
 ax2.scatter(x,rr,color = 'blue',marker='.',label="Rainfalls")
 ax2.set_ylabel('Rainfalls')
 ax2.tick_params('y',color='blue')
-ax2.set(title='Saarbrücken Ensheim 03.03.18')
+head = "Saarbrücken Ensheim " + ti_str
+ax2.set(title=head)
 ax2.legend()
-plt.savefig('grap.png')
+plt.savefig("grap_"+ti_str+".png")
 plt.show()
